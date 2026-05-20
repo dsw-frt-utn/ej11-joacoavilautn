@@ -28,10 +28,11 @@ internal class Ejemplos
 
         Console.WriteLine($"\n{alumnos.BuscarAlumno("Lautaro")}");
 
-        if (alumnos.BuscarAlumno("Pedro") == null)
+        var aBuscado = alumnos.BuscarAlumno("Pedro");
+        if (aBuscado == null)
             Console.WriteLine($"\nNo existe");
         else
-            Console.WriteLine($"{alumnos.BuscarAlumno("Pedro")}");
+            Console.WriteLine(aBuscado);
 
         Console.WriteLine("\nEliminando el alumno a2.");
         alumnos.Eliminar(a2);
@@ -51,6 +52,39 @@ internal class Ejemplos
     //Eliminar un alumno por clave y listar por consola los alumnos
     public static void EjemploDictionary()
     {
+        var a1 = new Alumno(1, "Joaquin", 8.0);
+        var a2 = new Alumno(2, "Lautaro", 7.0);
+        var a3 = new Alumno(3, "Tomas", 8.3);
+
+        var alumnos = new CasoDictionary();
+
+        alumnos.Agregar(1,a1);
+        alumnos.Agregar(2,a2);
+        alumnos.Agregar(3,a3);
+
+        foreach (KeyValuePair<int, Alumno> element in alumnos.Listar())
+        {
+            int legajo = element.Key;
+            Alumno a = element.Value;
+            Console.WriteLine($"Legajo: {legajo}, Alumno: {a}");
+        }
+
+        Console.WriteLine($"\n{alumnos.BuscarAlumno(1)}");
+
+        var aBuscado = alumnos.BuscarAlumno(4);
+        if (aBuscado == null)
+            Console.WriteLine("\nNo existe");
+        else
+            Console.WriteLine(aBuscado);
+
+        Console.WriteLine("\nEliminando alumno con legajo 2");
+        alumnos.Eliminar(2);
+        foreach (KeyValuePair<int, Alumno> element in alumnos.Listar())
+        {
+            int legajo = element.Key;
+            Alumno a = element.Value;
+            Console.WriteLine($"Legajo: {legajo}, Alumno: {a}");
+        }
 
     }
 
